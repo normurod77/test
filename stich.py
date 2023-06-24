@@ -15,7 +15,7 @@ import queue
 import json
 import winsound
 import datetime
-
+from plyer import battery
 model = vosk.Model("model")
 samplerate = 16000
 device = 1
@@ -92,14 +92,14 @@ def makeSomething(cmd: str):
         talk(random.choice(jokes))
 
     elif "как будет " in cmd:
-        mpt=str(zadanie[zadanie.find("как будет "):])
+        mpt=str(cmd[cmd.find("как будет "):])
         leng = Translator(from_lang="ru", to_lang="en")
         text = leng.translate(mpt)
         talk(text)
     elif 'заряд' in cmd:
-        self.lbl1.text = str(battery.status['isCharging'])
-        self.lbl2.text = str(battery.status['percentage']) + "%"
-        talk(self.lbl2.text)
+        lbl1 = str(battery.status['isCharging'])
+        lbl2 = str(battery.status['percentage']) + "%"
+        talk(lbl2)
         winsound.PlaySound('Другой информации нет.wav', winsound.SND_FILENAME)
 class myapp(App):
     """docstring for ClassName"""
